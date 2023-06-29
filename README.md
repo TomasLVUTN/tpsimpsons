@@ -1,5 +1,4 @@
-# tpsimpsons
-**% Enunciado de clase
+% Enunciado de clase
 %pariente(Padre, Hijo) -> aridad 2 -> relaciona a un/a padre/madre con un/a hijo/a
 pariente(homero, bart).
 pariente(homero, lisa).
@@ -97,8 +96,8 @@ deporteQueHace(rod, futbol(11,0,100)).
 
 deporteQueHace(lisa, natacion(1200,20)).
 
-deporteQueHace(tod, rugby("pilar",1)).
-deporteQueHace(lisroda, rugby("wings",0)).
+deporteQueHace(tod, rugby(pilar,1)).
+deporteQueHace(rod, rugby(wings,0)).
 
 %9
 quienNada(Persona):-
@@ -113,13 +112,28 @@ esBuenDeportista(Persona):-
 esBueno(futbol(_,Goles,Out)) :-
     Goles - Out > 5.
 
-esBuenorugby(Posicion, _):-
-    member(Posicion, ["pilar", "wing"]).
+esBueno(rugby(Posicion,_)):-
+    member(Posicion, [pilar, wings]).
 
 esBuenonatacion(Metros, _):-
       Metros > 1000.
 
+%11
+
+esExitoso(Persona):-
+    deporteQueHace(Persona,_), %%para todo deporte
+    forall(deporteQueHace(Persona, Deporte), tieneMasdeDiez(Deporte)). %%busque en cada persona, para todo deporte
+
+tieneMasdeDiez(futbol(Medallas,_,_)):-
+    Medallas > 10.
+
+tieneMasdeDiez(rugby(_,Medallas)):-
+        Medallas > 10.
+
+tieneMasdeDiez(natacion(_,Medallas)):-
+        Medallas > 10.
+        
 
 
 
-**
+
